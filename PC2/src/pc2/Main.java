@@ -92,33 +92,134 @@ public class Main {
     }
 
     private void registrarDatosPaciente() {
-       
+       Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingrese los datos del paciente:");
+        System.out.print("DNI: ");
+        String dni = scanner.next();
+        System.out.print("Nombre: ");
+        String nombre = scanner.next();
+        System.out.print("Dirección: ");
+        String direccion = scanner.next();
+        System.out.print("Peso: ");
+        double peso = scanner.nextDouble();
+        System.out.print("Temperatura: ");
+        double temperatura = scanner.nextDouble();
+
+        Paciente nuevoPaciente = new Paciente(dni, nombre, direccion, peso, temperatura);
+        pacientes.add(nuevoPaciente);
+
+        System.out.println("Paciente registrado con éxito.");
     }
 
     private void eliminarDatosPaciente() {
-        
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese la posición del paciente a eliminar: ");
+        int posicion = scanner.nextInt();
+
+        if (posicion >= 0 && posicion < pacientes.size()) {
+            pacientes.remove(posicion);
+            System.out.println("Paciente eliminado con éxito.");
+        } else {
+            System.out.println("Posición no válida. Intente nuevamente.");
+        }
     }
 
     private void modificarDatosPaciente() {
-       
+       Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese la posición del paciente a modificar: ");
+        int posicion = scanner.nextInt();
+
+        if (posicion >= 0 && posicion < pacientes.size()) {
+            Paciente paciente = pacientes.get(posicion);
+
+            System.out.println("Ingrese los nuevos datos del paciente:");
+            System.out.print("Nombre: ");
+            paciente.setNombre(scanner.next());
+            System.out.print("Dirección: ");
+            paciente.setDireccion(scanner.next());
+            System.out.print("Peso: ");
+            paciente.setPeso(scanner.nextDouble());
+            System.out.print("Temperatura: ");
+            paciente.setTemperatura(scanner.nextDouble());
+
+            System.out.println("Datos del paciente modificados con éxito.");
+        } else {
+            System.out.println("Posición no válida. Intente nuevamente.");
+        }
     }
 
     private void mostrarPesoQueMasSeRepite() {
-        
+        if (pacientes.isEmpty()) {
+            System.out.println("No hay pacientes registrados.");
+            return;
+        }
+
+        Map<Double, Integer> frecuenciaPesos = new HashMap<>();
+
+        for (Paciente paciente : pacientes) {
+            double peso = paciente.getPeso();
+            frecuenciaPesos.put(peso, frecuenciaPesos.getOrDefault(peso, 0) + 1);
+        }
+
+        double pesoMasRepetido = Collections.max(frecuenciaPesos.entrySet(), Map.Entry.comparingByValue()).getKey();
+        System.out.println("El peso que más se repite es: " + pesoMasRepetido);
     }
 
     private void mostrarCantidadPacientesConPesoRepetido() {
-        
+        if (pacientes.isEmpty()) {
+            System.out.println("No hay pacientes registrados.");
+            return;
+        }
+
+        Map<Double, Integer> frecuenciaPesos = new HashMap<>();
+
+        for (Paciente paciente : pacientes) {
+            double peso = paciente.getPeso();
+            frecuenciaPesos.put(peso, frecuenciaPesos.getOrDefault(peso, 0) + 1);
+        }
+
+        double pesoMasRepetido = Collections.max(frecuenciaPesos.entrySet(), Map.Entry.comparingByValue()).getKey();
+        int cantidadPacientes = frecuenciaPesos.get(pesoMasRepetido);
+
+        System.out.println("La cantidad de pacientes con el peso que más se repite es: " + cantidadPacientes);
     }
 
     private void mostrarPesoMayorYMenor() {
-        
+         if (pacientes.isEmpty()) {
+            System.out.println("No hay pacientes registrados.");
+            return;
+        }
+
+        double pesoMayor = Double.MIN_VALUE;
+        double pesoMenor = Double.MAX_VALUE;
+
+        for (Paciente paciente : pacientes) {
+            double peso = paciente.getPeso();
+            pesoMayor = Math.max(pesoMayor, peso);
+            pesoMenor = Math.min(pesoMenor, peso);
+        }
+
+        System.out.println("Peso mayor: " + pesoMayor);
+        System.out.println("Peso menor: " + pesoMenor);
     }
 
     private void dividirRangoDePesos() {
-        
-    }
+        if (pacientes.isEmpty()) {
+            System.out.println("No hay pacientes registrados.");
+            return;
+        }
 
+        int rango1 = 0;
+        int rango2 = 0;
+        int rango3 = 0;
+        int rango4 = 0;
+
+        for (Paciente paciente : pacientes);
+    }
+    
     private void mostrarListaPacientesOrdenadosPorApellidos() {
        
     }
